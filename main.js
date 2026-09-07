@@ -1,6 +1,6 @@
 import { randomScrambleForEvent as scramble } from "https://cdn.cubing.net/v0/js/cubing/scramble";
 function timer() {
-    document.querySelector("#seconds").value = `${Math.floor((Date.now()-start)/60000)}:${((Date.now()-start)/1000 % 60).toFixed(2)}`;
+    document.querySelector("#seconds").value = `${Math.floor((Date.now()-start)/60000)}:${((Date.now()-start)/1000 % 60).toFixed(2).padStart(5, "0")}`;
 }
 let start = 0; let interval;
 window.onload = async () => {
@@ -10,7 +10,10 @@ document.querySelector("#scrtype").oninput = async () => {
     document.querySelector("#scramble").textContent = await scramble(document.querySelector("#scrtype").value);
 }
 document.querySelector("#start").onclick = async () => {
-    if (document.querySelector("#start").textContent == "Start") {
+    if (document.querySelector("#start").textContent == "Submit") {
+        document.querySelector("#start").textContent = "Start";
+        document.querySelector("#scramble").textContent = await scramble(document.querySelector("#scrtype").value);
+    } else if (document.querySelector("#start").textContent == "Start") {
         document.querySelector("#start").textContent = "Stop";
         start = Date.now();
         interval = setInterval(timer, 4);
@@ -21,3 +24,4 @@ document.querySelector("#start").onclick = async () => {
         document.querySelector("#scramble").textContent = await scramble(document.querySelector("#scrtype").value);
     }
 }
+document.querySelector("#seconds").onclick = () => {document.querySelector("#start").textContent = "Submit"}
