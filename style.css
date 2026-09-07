@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Outfit:wght@100..900&display=swap');
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: oklch(0.1 0.0816 264.052);
+    color: oklch(0.9973 0.0014 286.37);
+}
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+}
+.nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5em;
+    gap: 1em;
+    background-color: transparent;
+}
+.btn {
+    background-color: oklch(0.1 0.0816 264.052);
+    color: oklch(0.9973 0.0014 286.37);
+    border: 1px solid oklch(0.9973 0.0014 286.37);
+    padding: 0.5em 1em;
+    border: none;
+    border-bottom: 2px solid oklch(0.9973 0.0014 286.37);
+    text-decoration: none;
+    border-radius: 0.25em;
+    transition: all 0.2s ease-in-out;
+}
+.btn.selected {
+    border-bottom: 3px solid oklch(0.6 0.247 286.37);
+}
+.btn:hover {cursor: pointer;}
+
+#seconds {
+    font-size: 4em;
+}
+#start {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    background-color: oklch(0.3 0.1784 286.37);
+    color: oklch(0.9973 0.0014 286.37);
+    font-size: 1.5em;
+    padding: 0.5em 1em;
+    border: 2px solid oklch(0.9973 0.0014 286.37);
+    text-decoration: none;
+    border-radius: 0.25em;
+    transition: all 0.2s ease-in-out;
+}
+#start:hover {cursor: pointer;}
+#scramble {
+    font-family: Monaco, monospace;
+    font-weight: 700;
+    font-size: 1.5em;
+    text-decoration: none;
+}

@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="An online cubing competition platform.">
+        <meta property="og:description" content="An online cubing competition platform.">
+        <meta name="author" content="ProtoType Studios">
+        <meta property="og:title" content="Cubitry™">
+        <meta property="og:url" content="https://cubitry.github.io/">
+        <meta name="theme-color" content="#303336">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cubitry</title>
+        <link rel="canonical" href="https://cubitry.github.io/" />
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <center>
+            <h1>Cubitry™</h1>
+            <p style="font-size: 1.2em; font-weight: 600;">An online cubing competition platform.</p>
+            <hr>
+            <div class="nav"><button class="btn selected" id="timer">Timer</button><button class="btn" id="comps">Competitions</button></div>
+            <div class="timer">
+                <h2 id="seconds">0.00</h2>
+                <button id="start">Start</button><p>Or hold space for 0.5 seconds.</p>
+                <br>
+                <p id="scramble"></p>
+                <label for="scrtype">Scramble Type:</label>
+                <select id="scrtype">
+                    <option value="222">2x2x2</option>
+                    <option value="333">3x3x3</option>
+                    <option value="333bf">3x3x3 Blindfolded</option>
+                    <option value="333fm">3x3x3 Fewest Moves</option>
+                    <option value="333oh">3x3x3 One-Handed</option>
+                    <option value="333mbf">3x3x3 Multi-Blind</option>
+                    <option value="444">4x4x4</option>
+                    <option value="444bf">4x4x4 Blindfolded</option>
+                    <option value="555">5x5x5</option>
+                    <option value="555bf">5x5x5 Blindfolded</option>
+                    <option value="666">6x6x6</option>
+                    <option value="777">7x7x7</option>
+                    <option value="clock">Clock</option>
+                    <option value="minx">Megaminx</option>
+                    <option value="pyram">Pyraminx</option>
+                    <option value="skewb">Skewb</option>
+                    <option value="sq1">Square-1</option>
+                </select>
+            </div>
+        </center>
+        <script type="module" src="./main.js"></script>
+    </body>
+</html>
