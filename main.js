@@ -1,6 +1,6 @@
 import { randomScrambleForEvent as scramble } from "https://cdn.cubing.net/v0/js/cubing/scramble";
 function timer() {
-    document.querySelector("#seconds").textContent = ((Date.now()-start)/1000).toFixed(2);
+    document.querySelector("#seconds").value = `${Math.floor((Date.now()-start)/60000)}:${((Date.now()-start)/1000 % 60).toFixed(2)}`;
 }
 let start = 0; let interval;
 window.onload = async () => {
@@ -17,7 +17,7 @@ document.querySelector("#start").onclick = async () => {
     } else {
         document.querySelector("#start").textContent = "Start";
         clearInterval(interval);
-        document.querySelector("#seconds").textContent = ((Date.now()-start)/1000).toFixed(2);
+        document.querySelector("#seconds").value = ((Date.now()-start)/1000).toFixed(2);
         document.querySelector("#scramble").textContent = await scramble(document.querySelector("#scrtype").value);
     }
 }
