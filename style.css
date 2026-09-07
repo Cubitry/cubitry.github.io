@@ -8,6 +8,10 @@ h1 {
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
 }
+select {
+    background-color: oklch(0.25 0.1501 286.37);
+    color: oklch(0.9973 0.0014 286.37);
+}
 .nav {
     display: flex;
     justify-content: center;
