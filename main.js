@@ -17,5 +17,6 @@ document.querySelector("#start").onclick = () => {
     } else {
         document.querySelector("#start").textContent = "Start";
         clearInterval(interval);
+        document.querySelector("#seconds").textContent = ((Date.now()-start)/1000).toFixed(2);
     }
 }
