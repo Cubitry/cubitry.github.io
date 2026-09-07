@@ -18,5 +18,6 @@ document.querySelector("#start").onclick = () => {
         document.querySelector("#start").textContent = "Start";
         clearInterval(interval);
         document.querySelector("#seconds").textContent = ((Date.now()-start)/1000).toFixed(2);
+        document.querySelector("#scramble").textContent = await scramble(document.querySelector("#scrtype").value);
     }
 }
