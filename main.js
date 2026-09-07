@@ -20,7 +20,6 @@ window.onload = async () => {
     document.querySelector("#scramble").textContent = await scramble("333");
 }
 window.addEventListener("keydown", async (event) => {
-    event.preventDefault();
     if (event.code == "Space") {
         if (event.repeat) return;
         if (canstart == "started") {
