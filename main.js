@@ -9,7 +9,7 @@ window.onload = async () => {
 document.querySelector("#scrtype").oninput = async () => {
     document.querySelector("#scramble").textContent = await scramble(document.querySelector("#scrtype").value);
 }
-document.querySelector("#start").onclick = () => {
+document.querySelector("#start").onclick = async () => {
     if (document.querySelector("#start").textContent == "Start") {
         document.querySelector("#start").textContent = "Stop";
         start = Date.now();
