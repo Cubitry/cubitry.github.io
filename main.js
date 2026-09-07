@@ -51,7 +51,7 @@ window.addEventListener("keyup", async (event) => {
 document.querySelector("#scrtype").oninput = async () => {
     document.querySelector("#scramble").textContent = await scramble(document.querySelector("#scrtype").value);
 }
-document.querySelector("#start").onclick = async () => {
+document.querySelector("#start").oninput = async () => {
     if (document.querySelector("#start").textContent == "Submit") {
         document.querySelector("#start").textContent = "Start";
         document.querySelector("#scramble").textContent = await scramble(document.querySelector("#scrtype").value);
