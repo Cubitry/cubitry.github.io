@@ -2,6 +2,6 @@ import { randomScrambleForEvent as scramble } from "https://cdn.cubing.net/v0/js
 window.onload = async () => {
     document.querySelector("#scramble").textContent = await scramble("333");
 }
-document.querySelector("#scrtype").oninput = () => {
+document.querySelector("#scrtype").oninput = async () => {
     document.querySelector("#scramble").textContent = await scramble(document.querySelector("#scrtype").value);
 }
