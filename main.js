@@ -9,9 +9,9 @@ async function startTimer() {
     canstart = "started";
 }
 async function stopTimer() {
+    timer();
     document.querySelector("#start").textContent = "Start";
     clearInterval(interval);
-    document.querySelector("#seconds").value = ((Date.now()-start)/1000).toFixed(2);
     document.querySelector("#scramble").textContent = await scramble(document.querySelector("#scrtype").value);
     canstart = false;
 }
