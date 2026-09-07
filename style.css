@@ -69,4 +69,13 @@ select, #comp {
     margin-bottom: 1em;
     width: 25em;
     text-align: center;
+    font-size: 1.5em;
+    font-family: "Outfit", sans-serif;
+    border: none;
+    border-radius: 1em;
+    padding: 0.5em 1em;
+}
+#loadcomp {
+    font-size: 1.25em;
+    cursor: pointer;
 }
