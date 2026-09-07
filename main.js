@@ -2,13 +2,13 @@ import { randomScrambleForEvent as scramble } from "https://cdn.cubing.net/v0/js
 function timer() {
     document.querySelector("#seconds").value = `${Math.floor((Date.now()-start)/60000)}:${((Date.now()-start)/1000 % 60).toFixed(2).padStart(5, "0")}`;
 }
-function startTimer() {
+async function startTimer() {
     document.querySelector("#start").textContent = "Stop";
     start = Date.now();
     interval = setInterval(timer, 4);
     canstart = "started";
 }
-function stopTimer() {
+async function stopTimer() {
     document.querySelector("#start").textContent = "Start";
     clearInterval(interval);
     document.querySelector("#seconds").value = ((Date.now()-start)/1000).toFixed(2);
@@ -19,12 +19,12 @@ let start = 0; let interval; let space; let hold = false; let canstart = false;
 window.onload = async () => {
     document.querySelector("#scramble").textContent = await scramble("333");
 }
-window.addEventListener("keydown", (event) => {
+window.addEventListener("keydown", async (event) => {
     event.preventDefault();
     if (event.code == "Space") {
         if (event.repeat) return;
         if (canstart == "started") {
-            stopTimer();
+            await stopTimer();
         }
         hold = true;
         canstart = false;
@@ -37,13 +37,13 @@ window.addEventListener("keydown", (event) => {
         }, 500);
     }
 });
-window.addEventListener("keyup", (event) => {
+window.addEventListener("keyup", async (event) => {
     if (event.code == "Space") {
         hold = false;
         document.querySelector("#seconds").style.color = "oklch(0.9973 0.0014 286.37)";
         clearTimeout(space);
         if (canstart) {
-            startTimer();
+            await startTimer();
         }
     }
 })
@@ -54,8 +54,8 @@ document.querySelector("#start").onclick = async () => {
     if (document.querySelector("#start").textContent == "Submit") {
         document.querySelector("#start").textContent = "Start";
         document.querySelector("#scramble").textContent = await scramble(document.querySelector("#scrtype").value);
-    } else if (document.querySelector("#start").textContent == "Start") {startTimer();}
-    else {stopTimer();}
+    } else if (document.querySelector("#start").textContent == "Start") {await startTimer();}
+    else {await stopTimer();}
 }
 document.querySelector("#seconds").onclick = () => {document.querySelector("#start").textContent = "Submit"}
 document.querySelector("#timer").onclick = () => {
