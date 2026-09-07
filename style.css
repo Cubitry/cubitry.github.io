@@ -38,6 +38,13 @@ select {
 
 #seconds {
     font-size: 4em;
+    background-color: transparent;
+    font-weight: 600;
+    border: none;
+    color: oklch(0.9973 0.0014 286.37);
+    font-family: 'Outfit', sans-serif;
+    text-align: center;
+    margin: 0.5em;
 }
 #start {
     font-family: 'Outfit', sans-serif;
