@@ -103,4 +103,3 @@ document.querySelector("#loadcomp").onclick = async () => {
         });
     }
 }
-}
