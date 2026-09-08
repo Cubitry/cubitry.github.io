@@ -10,6 +10,7 @@ async function startTimer() {
 }
 async function stopTimer() {
     timer();
+    times.push(document.querySelector("#seconds").value);
     document.querySelector("#start").textContent = "Start";
     clearInterval(interval);
     document.querySelector("#scramble").textContent = await scramble(document.querySelector("#scrtype").value);
@@ -17,6 +18,7 @@ async function stopTimer() {
 }
 let start = 0; let interval; let space; let hold = false; let canstart = false;
 const toTitleCase = str => str.toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
+let times = localStorage.getItem("times").split(",") || [];
 window.onload = async () => {
     document.querySelector("#scramble").textContent = await scramble("333");
 }
@@ -59,7 +61,7 @@ document.querySelector("#start").onclick = async () => {
     } else if (document.querySelector("#start").textContent == "Start") {await startTimer();}
     else {await stopTimer();}
 }
-document.querySelector("#seconds").onclick = () => {document.querySelector("#start").textContent = "Submit"}
+document.querySelector("#seconds").oninput = () => {document.querySelector("#start").textContent = "Submit"}
 document.querySelector("#timer").onclick = () => {
     document.querySelector("#timer").classList.add("selected");
     document.querySelector("#comps").classList.remove("selected");
