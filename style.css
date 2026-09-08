@@ -69,7 +69,7 @@ select, #comp, #pass {
 }
 #comp {
     margin-bottom: 1em;
-    width: 25em;
+    width: 80%;
     text-align: center;
     font-size: 1.5em;
     font-family: "Outfit", sans-serif;
