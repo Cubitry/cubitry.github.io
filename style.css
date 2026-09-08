@@ -80,3 +80,9 @@ select, #comp {
     font-size: 1.25em;
     cursor: pointer;
 }
+#loaded {
+    height: 20em;
+    background-color: oklch(0.3 0.1784 286.37);
+    padding: 0.5em;
+    margin: 1em;
+}
