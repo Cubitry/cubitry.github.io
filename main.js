@@ -87,4 +87,20 @@ document.querySelector("#loadcomp").onclick = async () => {
             document.querySelector("#cgroup").textContent = `${data.group} seconds between groups`;
         }
     }
+    document.querySelector("#join").onclick = () => {
+        const socket = new WebSocket(`wss://cubitry.scratchy271.workers.dev/competitions/${comp}`);
+        socket.addEventListener("open", () => {
+        	console.log("Connected!");
+        });
+        socket.addEventListener("message", (event) => {
+        	console.log("Server:", event.data);
+        });
+        socket.addEventListener("close", () => {
+        	console.log("Disconnected");
+        });
+        socket.addEventListener("error", (error) => {
+        	console.error("WebSocket error:", error);
+        });
+    }
+}
 }
