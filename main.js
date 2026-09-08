@@ -16,6 +16,7 @@ async function stopTimer() {
     canstart = false;
 }
 let start = 0; let interval; let space; let hold = false; let canstart = false;
+const toTitleCase = str => str.toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
 window.onload = async () => {
     document.querySelector("#scramble").textContent = await scramble("333");
 }
@@ -51,7 +52,7 @@ window.addEventListener("keyup", async (event) => {
 document.querySelector("#scrtype").oninput = async () => {
     document.querySelector("#scramble").textContent = await scramble(document.querySelector("#scrtype").value);
 }
-document.querySelector("#start").oninput = async () => {
+document.querySelector("#start").onclick = async () => {
     if (document.querySelector("#start").textContent == "Submit") {
         document.querySelector("#start").textContent = "Start";
         document.querySelector("#scramble").textContent = await scramble(document.querySelector("#scrtype").value);
@@ -70,4 +71,20 @@ document.querySelector("#comps").onclick = () => {
     document.querySelector("#comps").classList.add("selected");
     document.querySelector(".timer").style.display = "none";
     document.querySelector(".comps").style.display = "block";
+}
+document.querySelector("#loadcomp").onclick = () => {
+    const comp = document.querySelector("#comp").value.trim().replace(/[^a-zA-Z0-9 ]/g, "");
+    if (comp) {
+        const response = await fetch(`https://cubitry.scratchy271.workers.dev/competition/${comp}`);
+        const text = await response.text();
+        const data = (() => {try {return JSON.parse(text);} catch {return text;}})();
+        if (response.ok) {
+            document.querySelector("#cname").textContent = comp;
+            document.querySelector("#ctype").textContent = `${toTitleCase(data.event)} and ${toTitleCase(data.type)} Competition, ${data.started ? "Started" : "Not Started"}`;
+            document.querySelector("#csolves").textContent = data.solves;
+            document.querySelector("#cbetween").textContent = data.between;
+            document.querySelector("#cgroups").textContent = data.groups;
+            document.querySelector("#cgroup").textContent = data.group;
+        }
+    }
 }
