@@ -95,6 +95,7 @@ select, #comp, #pass, #join {
 #join {
     font-size: 1.25em;
     cursor: pointer;
+    margin: 1em;
 }
 #join:disabled {
     background-color: oklch(0.3 0.0784 286.37);
