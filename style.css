@@ -8,7 +8,7 @@ h1 {
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
 }
-select, #comp, #pass {
+select, #comp, #pass, #join {
     background-color: oklch(0.25 0.1501 286.37);
     color: oklch(0.9973 0.0014 286.37);
     border: none;
@@ -81,7 +81,7 @@ select, #comp, #pass {
     cursor: pointer;
 }
 #loaded {
-    height: 20em;
+    height: fit-content;
     background-color: oklch(0.3 0.1784 286.37);
     padding: 0.5em;
     margin: 1em;
@@ -91,4 +91,7 @@ select, #comp, #pass {
     font-family: 'Outfit', sans-serif;
     text-align: center;
     font-size: 1.25em;
+}
+#join:disabled {
+    background-color: oklch(0.3 0.0784 286.37);
 }
