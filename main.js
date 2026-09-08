@@ -81,10 +81,10 @@ document.querySelector("#loadcomp").onclick = async () => {
         if (response.ok) {
             document.querySelector("#cname").textContent = comp;
             document.querySelector("#ctype").textContent = `${toTitleCase(data.event)} and ${toTitleCase(data.type)} Competition, ${data.started ? "Started" : "Not Started"}`;
-            document.querySelector("#csolves").textContent = data.solves;
-            document.querySelector("#cbetween").textContent = data.between;
-            document.querySelector("#cgroups").textContent = data.groups;
-            document.querySelector("#cgroup").textContent = data.group;
+            document.querySelector("#csolves").textContent = `${data.solves} solves per group`;
+            document.querySelector("#cbetween").textContent = `${data.between} seconds between solves`;
+            document.querySelector("#cgroups").textContent = `${data.groups} groups`;
+            document.querySelector("#cgroup").textContent = `${data.group} seconds between groups`;
         }
     }
 }
