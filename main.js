@@ -72,7 +72,7 @@ document.querySelector("#comps").onclick = () => {
     document.querySelector(".timer").style.display = "none";
     document.querySelector(".comps").style.display = "block";
 }
-document.querySelector("#loadcomp").onclick = () => {
+document.querySelector("#loadcomp").onclick = async () => {
     const comp = document.querySelector("#comp").value.trim().replace(/[^a-zA-Z0-9 ]/g, "");
     if (comp) {
         const response = await fetch(`https://cubitry.scratchy271.workers.dev/competition/${comp}`);
