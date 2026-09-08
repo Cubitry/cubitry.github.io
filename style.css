@@ -8,9 +8,10 @@ h1 {
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
 }
-select, #comp {
+select, #comp, #pass {
     background-color: oklch(0.25 0.1501 286.37);
     color: oklch(0.9973 0.0014 286.37);
+    border: none;
 }
 .nav {
     display: flex;
@@ -72,7 +73,6 @@ select, #comp {
     text-align: center;
     font-size: 1.5em;
     font-family: "Outfit", sans-serif;
-    border: none;
     border-radius: 1em;
     padding: 0.5em 1em;
 }
@@ -85,4 +85,10 @@ select, #comp {
     background-color: oklch(0.3 0.1784 286.37);
     padding: 0.5em;
     margin: 1em;
+}
+#pass {
+    width: 100%;
+    font-family: 'Outfit', sans-serif;
+    text-align: center;
+    font-size: 1.25em;
 }
