@@ -11,6 +11,7 @@ async function startTimer() {
 async function stopTimer() {
     timer();
     times.push(document.querySelector("#seconds").value);
+    localStorage.setItem("times", times);
     document.querySelector("#start").textContent = "Start";
     clearInterval(interval);
     document.querySelector("#scramble").textContent = await scramble(document.querySelector("#scrtype").value);
@@ -81,6 +82,7 @@ document.querySelector("#loadcomp").onclick = async () => {
         const response = await fetch(`https://cubitry.scratchy271.workers.dev/competition/${comp}`);
         const text = await response.text();
         const data = (() => {try {return JSON.parse(text);} catch {return text;}})();
+        document.querySelector("#join").disabled = true;
         if (response.ok) {
             document.querySelector("#cname").textContent = comp;
             document.querySelector("#ctype").textContent = `${toTitleCase(data.event)} and ${toTitleCase(data.type)} Competition, ${data.started ? "Started" : "Not Started"}`;
@@ -88,10 +90,12 @@ document.querySelector("#loadcomp").onclick = async () => {
             document.querySelector("#cbetween").textContent = `${data.between} seconds between solves`;
             document.querySelector("#cgroups").textContent = `${data.groups} groups`;
             document.querySelector("#cgroup").textContent = `${data.group} seconds between groups`;
+            if (!data.started) document.querySelector("#join").disabled = false;
+            if (data.password) document.querySelector("#pass").value = data.password;
         }
     }
     document.querySelector("#join").onclick = () => {
-        const socket = new WebSocket(`wss://cubitry.scratchy271.workers.dev/competitions/${comp}`);
+        const socket = new WebSocket(`wss://cubitry.scratchy271.workers.dev/competitions/${comp}?password=${document.querySelector("#pass").value}`);
         socket.addEventListener("open", () => {
         	console.log("Connected!");
         });
