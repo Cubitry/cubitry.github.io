@@ -18,7 +18,8 @@ async function stopTimer() {
 }
 let start = 0; let interval; let space; let hold = false; let canstart = false;
 const toTitleCase = str => str.toLowerCase().replace(/\b\w/g, char => char.toUpperCase());
-let times = localStorage.getItem("times").split(",") || [];
+let times = [];
+if (localStorage.getItem("times")) times = localStorage.getItem("times").split(",");
 window.onload = async () => {
     document.querySelector("#scramble").textContent = await scramble("333");
 }
