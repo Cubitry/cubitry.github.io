@@ -80,7 +80,7 @@ document.querySelector("#comps").onclick = () => {
 document.querySelector("#loadcomp").onclick = async () => {
     const comp = document.querySelector("#comp").value.trim().replace(/[^a-zA-Z0-9 ]/g, "");
     if (comp) {
-        const response = await fetch(`https://cubitry.scratchy271.workers.dev/competition/${comp}`);
+        const response = await fetch(`https://cubitry.scratchy271.workers.dev/competition/${encodeURIComponent(comp)}`);
         const text = await response.text();
         const data = (() => {try {return JSON.parse(text);} catch {return text;}})();
         document.querySelector("#join").disabled = true;
@@ -95,7 +95,7 @@ document.querySelector("#loadcomp").onclick = async () => {
             if (data.password) document.querySelector("#pass").value = data.password;
         }
         document.querySelector("#join").onclick = () => {
-            const socket = new WebSocket(`wss://cubitry.scratchy271.workers.dev/competitions/${comp}?password=${document.querySelector("#pass").value}`);
+            const socket = new WebSocket(`wss://cubitry.scratchy271.workers.dev/competitions/${encodeURIComponent(comp)}?password=${encodeURIComponent(document.querySelector("#pass").value)}`);
             socket.addEventListener("open", () => {
             	console.log("Connected!");
                 document.querySelector("select").remove();
