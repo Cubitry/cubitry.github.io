@@ -1,10 +1,11 @@
 import { randomScrambleForEvent as scramble } from "https://cdn.cubing.net/v0/js/cubing/scramble";
 function timer() {
-    document.querySelector("#seconds").value = `${Math.floor((Date.now()-start)/60000)}:${((Date.now()-start)/1000 % 60).toFixed(2).padStart(5, "0")}`;
+    if (Date.now()-start < 60000) {document.querySelector("#seconds").value = `${((Date.now()-start)/1000).toFixed(2)}`;}
+    else {document.querySelector("#seconds").value = `${Math.floor((Date.now()-start)/60000)}:${((Date.now()-start)/1000 % 60).toFixed(2).padStart(5, "0")}`;}
 }
-async function startTimer() {
+async function startTimer(time=Date.now()) {
     document.querySelector("#start").textContent = "Stop";
-    start = Date.now();
+    start = time;
     interval = setInterval(timer, 4);
     canstart = "started";
 }
@@ -93,20 +94,57 @@ document.querySelector("#loadcomp").onclick = async () => {
             if (!data.started) document.querySelector("#join").disabled = false;
             if (data.password) document.querySelector("#pass").value = data.password;
         }
-    }
-    document.querySelector("#join").onclick = () => {
-        const socket = new WebSocket(`wss://cubitry.scratchy271.workers.dev/competitions/${comp}?password=${document.querySelector("#pass").value}`);
-        socket.addEventListener("open", () => {
-        	console.log("Connected!");
-        });
-        socket.addEventListener("message", (event) => {
-        	console.log("Server:", event.data);
-        });
-        socket.addEventListener("close", () => {
-        	console.log("Disconnected");
-        });
-        socket.addEventListener("error", (error) => {
-        	console.error("WebSocket error:", error);
-        });
+        document.querySelector("#join").onclick = () => {
+            const socket = new WebSocket(`wss://cubitry.scratchy271.workers.dev/competitions/${comp}?password=${document.querySelector("#pass").value}`);
+            socket.addEventListener("open", () => {
+            	console.log("Connected!");
+                document.querySelector("select").remove();
+                if (data.event == "free") {document.querySelector("label").innerHTML = `Competition: ${comp}<br>You may solve at any time after seeing the scramble, and you must wait for everyone else to finish afterwards.`;}
+                else {document.querySelector("label").innerHTML = `Competition: ${comp}<br>DO NOT start solving until the timer is positive (it reads at least 0:00.00). You are only permitted to scramble the cube according to the scramble above while the timer is negative.`;}
+                document.querySelector("#scramble").textContent = "";
+                document.querySelector("label").insertAdjacentHTML("afterend", `
+                <p id="ttype">${data.type} Competition</p>
+                <p id="tevent">${data.event} Event</p>
+                <p id="tsolves">${data.solves} solves per group</p>
+                <p id="tbetween">${data.between} seconds between solves</p>
+                <p id="tgroups">${data.groups} groups left</p>
+                <p id="tgroup">${data.group} seconds between groups</p>
+                <p id="tpassword">Password: ${data.password}</p>
+                `);
+            });
+            socket.addEventListener("message", (event) => {
+                const msg = event.data;
+            	console.log("Server:", msg);
+                switch (msg.type) {
+                    case "typeChanged":
+                        document.querySelector("#ttype").textContent = `${msg.value} Competition`;
+                        break;
+                    case "eventChanged":
+                        document.querySelector("#tevent").textContent = `${msg.value} Event`;
+                        break;
+                    case "solvesChanged":
+                        document.querySelector("#tsolves").textContent = `${msg.value} solves per group`;
+                        break;
+                    case "betweenChanged":
+                        document.querySelector("#tbetween").textContent = `${msg.value} seconds between solves`;
+                        break;
+                    case "groupsChanged":
+                        document.querySelector("#tgroups").textContent = `${msg.value} gruops left`;
+                        break;
+                    case "groupChanged":
+                        document.querySelector("#tgroup").textContent = `${msg.value} seconds between groups`;
+                        break;
+                    case "passwordChanged":
+                        document.querySelector("#tpassword").textContent = `Password: ${msg.value}`;
+                        break;
+                }
+            });
+            socket.addEventListener("close", () => {
+            	console.log("Disconnected");
+            });
+            socket.addEventListener("error", (error) => {
+            	console.error("WebSocket error:", error);
+            });
+        }
     }
 }
