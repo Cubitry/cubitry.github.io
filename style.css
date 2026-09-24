@@ -67,6 +67,15 @@ select, #comp, #pass, #join {
     font-size: 1.5em;
     text-decoration: none;
 }
+.time {
+    width: 89%;
+    height: fit-content;
+    margin: 1em;
+    padding: 1em;
+    border-radius: 1em;
+    font-weight: 800;
+    background-color: oklch(0.2 0.1418 264.05);
+}
 #comp {
     margin-bottom: 1em;
     width: 80%;
