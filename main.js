@@ -26,6 +26,7 @@ window.onload = async () => {
     document.querySelector("#scramble").textContent = await scramble("333");
     for (let time in times) {
         let t = times[time];
+        if (t.includes(":")) t.replace(/(\d+):([0-9.]+)/, (match, group1, group2) => Number(group1)*60+Number(group2));
         let mo3 = "---";
         if (time >= 2) {
             mo3 = [t, times[time-1], times[time-2]];
