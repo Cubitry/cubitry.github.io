@@ -24,7 +24,7 @@ let times = [];
 if (localStorage.getItem("times")) times = localStorage.getItem("times").split(",");
 window.onload = async () => {
     document.querySelector("#scramble").textContent = await scramble("333");
-    for (time in times) {
+    for (let time in times) {
         let t = times[time];
         let mo3 = "---";
         if (time >= 2) {
