@@ -53,7 +53,7 @@ window.onload = async () => {
                 else {ao12 = `${Math.floor(ao12/60)}:${(ao12 % 60).toFixed(2).padStart(5, "0")}`;}
             }
         }
-        let t = Number(t);
+        t = Number(t);
         if (t < 60) {t = `${t.toFixed(2)}`;}
         else {t = `${Math.floor(t/60)}:${(t % 60).toFixed(2).padStart(5, "0")}`;}
         document.querySelector("#times").insertAdjacentHTML("beforeend", `
