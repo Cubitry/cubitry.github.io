@@ -27,7 +27,7 @@ window.onload = async () => {
     for (let time in times) {
         let t = times[time];
         let mo3 = "---";
-        if (time >= 2) {
+        if (time <= times.length - 2) {
             mo3 = [t, times[time-1], times[time-2]];
             mo3 = mo3.includes("DNF") ? "DNF" : mo3.reduce((a, c) => a + Number(c)/3, 0);
             if (mo3 != "DNF") {
@@ -36,7 +36,7 @@ window.onload = async () => {
             }
         }
         let ao5 = "---";
-        if (time >= 4) {
+        if (time <= times.length - 4) {
             ao5 = [t, times[time-1], times[time-2], times[time-3], times[time-4]].sort((a,b)=>a-b).slice(1,4);
             ao5 = ao5.filter(ti => ti == "DNF").length >= 2 ? "DNF" : ao5.reduce((a, c) => a + Number(c)/3, 0);
             if (ao5 != "DNF") {
@@ -45,7 +45,7 @@ window.onload = async () => {
             }
         }
         let ao12 = "---";
-        if (time >= 11) {
+        if (time <= times.length - 11) {
             ao12 = [t, times[time-1], times[time-2], times[time-3], times[time-4], times[time-5], times[time-6], times[time-7], times[time-8], times[time-9], times[time-10], times[time-11]].sort((a,b)=>a-b).slice(1,11);
             ao12 = ao12.filter(ti => ti == "DNF").length >= 2 ? "DNF" : ao12.reduce((a, c) => a + Number(c)/10, 0);
             if (ao12 != "DNF") {
