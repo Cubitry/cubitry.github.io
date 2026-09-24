@@ -24,6 +24,42 @@ let times = [];
 if (localStorage.getItem("times")) times = localStorage.getItem("times").split(",");
 window.onload = async () => {
     document.querySelector("#scramble").textContent = await scramble("333");
+    for (time in times) {
+        let t = times[time];
+        let mo3 = "---";
+        if (time >= 2) {
+            mo3 = [t, times[time-1], times[time-2]];
+            mo3 = mo3.includes("DNF") ? "DNF" : mo3.reduce((a, c) => a + Number(c)/3, 0);
+            if (mo3 != "DNF") {
+                if (mo3 < 60) {mo3 = `${mo3.toFixed(2)}`;}
+                else {mo3 = `${Math.floor(mo3/60)}:${(mo3 % 60).toFixed(2).padStart(5, "0")}`;}
+            }
+        }
+        let ao5 = "---";
+        if (time >= 4) {
+            ao5 = [t, times[time-1], times[time-2], times[time-3], times[time-4]].sort((a,b)=>a-b).slice(1,4);
+            ao5 = ao5.filter(ti => ti == "DNF").length >= 2 ? "DNF" : ao5.reduce((a, c) => a + Number(c)/3, 0);
+            if (ao5 != "DNF") {
+                if (ao5 < 60) {ao5 = `${ao5.toFixed(2)}`;}
+                else {ao5 = `${Math.floor(ao5/60)}:${(ao5 % 60).toFixed(2).padStart(5, "0")}`;}
+            }
+        }
+        let ao12 = "---";
+        if (time >= 11) {
+            ao12 = [t, times[time-1], times[time-2], times[time-3], times[time-4], times[time-5], times[time-6], times[time-7], times[time-8], times[time-9], times[time-10], times[time-11]].sort((a,b)=>a-b).slice(1,11);
+            ao12 = ao12.filter(ti => ti == "DNF").length >= 2 ? "DNF" : ao12.reduce((a, c) => a + Number(c)/10, 0);
+            if (ao12 != "DNF") {
+                if (ao12 < 60) {ao12 = `${ao12.toFixed(2)}`;}
+                else {ao12 = `${Math.floor(ao12/60)}:${(ao12 % 60).toFixed(2).padStart(5, "0")}`;}
+            }
+        }
+        let t = Number(t);
+        if (t < 60) {t = `${t.toFixed(2)}`;}
+        else {t = `${Math.floor(t/60)}:${(t % 60).toFixed(2).padStart(5, "0")}`;}
+        document.querySelector("#times").insertAdjacentHTML("beforeend", `
+        <div class="time">${t} || mo3: ${mo3} || ao5: ${ao5} || ao12: ${ao12}</div>
+        `);
+    }
 }
 window.addEventListener("keydown", async (event) => {
     if (event.code == "Space") {
@@ -129,7 +165,7 @@ document.querySelector("#loadcomp").onclick = async () => {
                         document.querySelector("#tbetween").textContent = `${msg.value} seconds between solves`;
                         break;
                     case "groupsChanged":
-                        document.querySelector("#tgroups").textContent = `${msg.value} gruops left`;
+                        document.querySelector("#tgroups").textContent = `${msg.value} groups left`;
                         break;
                     case "groupChanged":
                         document.querySelector("#tgroup").textContent = `${msg.value} seconds between groups`;
