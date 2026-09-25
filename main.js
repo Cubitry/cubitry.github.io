@@ -65,7 +65,9 @@ window.onload = async () => {
 window.addEventListener("keydown", async (event) => {
     if (event.code == "Space") {
         document.querySelector("#start").blur();
+        document.querySelector("#timer").blur();
         document.querySelector("#loadcomp").blur();
+        if (document.querySelector("#timer").classList.contains("selected")) event.preventDefault();
         if (event.repeat) return;
         if (canstart == "started") {
             await stopTimer();
