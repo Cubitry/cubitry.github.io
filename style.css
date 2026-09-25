@@ -46,6 +46,7 @@ select, #comp, #pass, #join {
     font-family: 'Outfit', sans-serif;
     text-align: center;
     margin: 0.5em;
+    width: clamp(5em, 50%, 15em);
 }
 #start, #loadcomp, #join {
     font-family: 'Outfit', sans-serif;
